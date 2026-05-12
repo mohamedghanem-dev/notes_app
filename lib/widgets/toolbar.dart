@@ -278,6 +278,6 @@ class _Sep extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 4),
         width: 1, height: 28,
-        color: Colors.white20,
+        color: Colors.white.withOpacity(0.20),
       );
 }
