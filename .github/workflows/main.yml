@@ -9,27 +9,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: zulu
-          java-version: '17'
+          java-version: '17' # شرطك الأول: Java 17
+          
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2 # شرطك الثاني: v2
         with:
-          flutter-version: '3.24.0'
+          flutter-version: '3.24.0' # شرطك الثاني: إصدار ثابت
           channel: stable
-          cache: true
+          cache: true # شرطك الثالث: التخزين المؤقت
+
       - name: Write local.properties
         run: |
-          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
+          mkdir -p android # تأمين إنشاء المجلد عشان ميحصلش خطأ الصورة
+          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties # شرطك الرابع
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
+
       - name: Flutter pub get
         run: flutter pub get
+
       - name: Build APK
-        run: flutter build apk --release --no-tree-shake-icons
+        run: flutter build apk --release --no-tree-shake-icons # شرطك السادس
+
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4 # شرطك الخامس: v4
         with:
           name: notes-app-apk
           path: build/app/outputs/flutter-apk/app-release.apk
