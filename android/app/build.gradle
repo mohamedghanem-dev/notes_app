@@ -1,7 +1,7 @@
 plugins {
     id "com.android.application"
     id "dev.flutter.flutter-gradle-plugin"
-    id "org.jetbrains.kotlin.android"
+    id "kotlin-android"
 }
 
 android {
@@ -28,10 +28,16 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
         }
     }
 }
 
 flutter {
     source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22"
 }
